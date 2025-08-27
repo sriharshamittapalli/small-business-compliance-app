@@ -1,0 +1,41 @@
+Project Requirement (Condensed for Build Purposes)
+
+Build a website that helps US small business owners determine the laws, rules, and regulations that apply to them. The website must allow users to enter necessary business data (such as location, industry, size, etc.) and receive relevant compliance information about the rules they need to follow.
+
+Key Requirements:
+
+The site should cover a broad range of regulations from different rule-making bodies.
+
+The rules and requirements should vary based on inputs (location, industry, size, etc.).
+
+The backend should be able to efficiently organize, manage, and search regulations from a large dataset.
+
+Provide a visualization of the data structures used in the backend.
+
+The UI should be simple, clean, and require minimal screens (ideally a single screen).
+
+The tool must be intuitive for business owners; no written instructions are necessary.
+
+Assumptions and Constraints:
+
+Scope to US-based businesses only.
+
+Rules/regulations can be a snapshot—does not need to be kept up-to-date after build.
+
+Functionality: The system should give correct compliance results based on arbitrary test data.
+
+Backend must be demonstrably scalable to accommodate hundreds or thousands of rules.
+
+Deliverables:
+
+A working web application (single URL) including:
+
+Data-entry interface for business info
+
+Logic to match inputs to relevant rules
+
+Organized and scalable backend
+
+Data structure visualization
+
+Clean, minimalist frontend

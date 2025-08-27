@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Small Business Compliance Checker
 
-## Getting Started
+A web application that helps US small business owners determine the laws, rules, and regulations that apply to them based on their business characteristics.
 
-First, run the development server:
+## Features
+
+- **Single-screen interface** for easy business data entry
+- **Dynamic regulation matching** based on location, industry, size, and business type
+- **Scalable database structure** with efficient querying for hundreds/thousands of regulations
+- **Data structure visualization** showing the backend organization
+- **Clean, minimalist design** requiring no written instructions
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: Supabase (PostgreSQL)
+- **Icons**: Lucide React
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up Supabase
+
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Copy your project URL and anon key
+3. Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 3. Set up the Database
+
+1. In your Supabase dashboard, go to the SQL Editor
+2. Run the migration script from `supabase/migrations/001_create_regulations_table.sql`
+
+### 4. Seed the Database
+
+After starting the development server, make a POST request to seed the database:
+
+```bash
+# Start the development server
+npm run dev
+
+# In another terminal, seed the database
+curl -X POST http://localhost:3000/api/seed
+```
+
+### 5. Run the Application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application uses two main tables:
 
-## Learn More
+### `regulations`
+- Stores all business regulations with filtering criteria
+- Supports array fields for states, industries, and business types
+- Includes employee count and revenue ranges for precise matching
+- Optimized with GIN indexes for efficient array queries
 
-To learn more about Next.js, take a look at the following resources:
+### `business_profiles`
+- Stores submitted business information
+- Used for analytics and regulation matching history
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Regulation Matching Algorithm
+The system matches businesses to regulations using multiple criteria:
+- **Geographic**: State-based filtering
+- **Industry**: Industry-specific regulations
+- **Business Type**: Corporate structure requirements
+- **Size**: Employee count and revenue thresholds
 
-## Deploy on Vercel
+### Performance Optimization
+- GIN indexes on array columns for fast array operations
+- Range indexes for numerical filtering
+- Efficient query structure to handle large regulation datasets
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### User Experience
+- Single-page interface with intuitive form inputs
+- Real-time validation and feedback
+- Clear regulation summaries with compliance requirements
+- Database structure visualization for transparency
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Sample Data
+
+The application includes sample regulations covering:
+- Fair Labor Standards Act (FLSA)
+- Occupational Safety and Health Act (OSHA)
+- Americans with Disabilities Act (ADA)
+- California Consumer Privacy Act (CCPA)
+- Food Safety Modernization Act (FSMA)
+- Sarbanes-Oxley Act (SOX)
+
+## Deployment
+
+The application is ready to deploy to platforms like Vercel, Netlify, or any Next.js-compatible hosting service. Make sure to set your environment variables in the deployment platform.
+
+## Legal Disclaimer
+
+This tool is for informational purposes only and should not be considered legal advice. Always consult with qualified legal professionals for specific compliance requirements.
